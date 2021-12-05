@@ -10,30 +10,46 @@ def create_edges(nodesFile, ratingsFile):
             ns = csv.reader(filtered_nodes)        
             x=0
             y=0
+            with open(ratingsFile, 'r') as ratings_file:
+                filtered_ratings = (line.replace('\n', '') for line in ratings_file)
+                rs = list(csv.reader(filtered_ratings))
             for node_row in ns:
                     
-                x = x + 1
+                
                 imdbid = node_row[0]
-                with open(ratingsFile, 'r') as ratings_file:
-                    filtered_ratings = (line.replace('\n', '') for line in ratings_file)
-                    rs = csv.reader(filtered_ratings)
-                    print(x)
+                
+                print(x)
                     #print(filtered_ratings.length)
-                    for ratings_row in rs:
+
+                if(rs[x][15]):
+                    data=[x-1,85855,rs[x][15]]
+                    writer.writerow(data)
+                if(rs[x][17]):
+                    data=[x-1,85856,rs[x][17]]
+                    writer.writerow(data)
+                if(rs[x][19]):
+                    data=[x-1,85857,rs[x][19]]
+                    writer.writerow(data)
+                if(rs[x][21]):
+                    data=[x-1,85858,rs[x][21]]
+                    writer.writerow(data)
+                x=x+1
+
+                    #for ratings_row in rs:
                         #print(length)
-                        if imdbid.strip()[3:] == ratings_row[0].strip() or ratings_row[0].strip() in imdbid or ratings_row[0].strip() == imdbid.strip():
+                    #    if imdbid.strip()[3:] == ratings_row[0].strip() or ratings_row[0].strip() in imdbid or ratings_row[0].strip() == imdbid.strip():
                             
-                            data=[node_row[0],'0-18',ratings_row[15]]
-                            writer.writerow(data)
-                            data=[node_row[0],'18-30',ratings_row[17]]
-                            writer.writerow(data)
-                            data=[node_row[0],'30-45',ratings_row[19]]
-                            writer.writerow(data)
-                            data=[node_row[0],'45+',ratings_row[21]]
-                            writer.writerow(data)
-                            break
+                    #        data=[node_row[0],'0-18',ratings_row[15]]
+                    #        writer.writerow(data)
+                            #data=[node_row[0],'18-30',ratings_row[17]]
+                            #writer.writerow(data)
+                            #data=[node_row[0],'30-45',ratings_row[19]]
+                            #writer.writerow(data)
+                            #data=[node_row[0],'45+',ratings_row[21]]
+                            #writer.writerow(data)
+                            #break
 
 
-create_edges("new_nodes.csv","ratings.csv")
+create_edges("nodes.csv","ratings.csv")
 print("done")
                     

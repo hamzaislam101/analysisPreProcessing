@@ -10,9 +10,12 @@ def read_csv(file_name):
             for row in csv.reader(filtered):
                 if ',' in row[1]:
                     genres = row[1].split(',')
-                    for genre in genres:
-                        data = [row[0], genre.strip(), row[2]]
-                        writer.writerow(data)
+                    data = [row[0], genres[0].strip(), row[2]]
+                    #print(data)
+                    writer.writerow(data)
+                    #for genre in genres:
+                    #    data = [row[0], genre.strip(), row[2]]
+                    #    writer.writerow(data)
                 else:
                     writer.writerow(row)
 
